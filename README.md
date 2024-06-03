@@ -1,5 +1,5 @@
 # MediCamp
-### Live Link: https://medicamp1.web.app 
+### Live Link:  
 
 #### My Project Features
 - Unique Design and Clean Code

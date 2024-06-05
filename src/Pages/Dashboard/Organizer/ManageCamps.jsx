@@ -127,7 +127,7 @@ const ManageCamps = () => {
 										<td>
 											<div className="inline-block mr-2">
 												<Link to={`/dashboard/update-camps/${camp._id}`}>
-													<AwesomeButton type="primary">Edit</AwesomeButton>
+													<AwesomeButton type="primary">Update</AwesomeButton>
 												</Link>
 											</div>
 											<div className="inline-block">

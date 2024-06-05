@@ -33,7 +33,7 @@ const PaymentHistory = () => {
 	return (
 		<>
 			<Helmet>
-				<title>MediCamp | Payment History</title>
+				<title>MediCamp | Payment Historys</title>
 			</Helmet>
 			<main>
 				<PageHeader title="Payment History" />

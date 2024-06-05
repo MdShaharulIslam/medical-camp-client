@@ -61,7 +61,7 @@ const CheckOutForm = () => {
 			setError("");
 		}
 
-		// confirm payment
+		// confirm payments added repo
 		const { paymentIntent, error: confirmError } =
 			await stripe.confirmCardPayment(clientSecret, {
 				payment_method: {

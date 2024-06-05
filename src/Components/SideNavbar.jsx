@@ -50,6 +50,16 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
 								</li>
 							</NavLink>
 							<NavLink
+								to="/dashboard/analytics"
+								className={({ isActive, isPending }) =>
+									isActive ? "text-[#054279]" : isPending ? "pending" : ""
+								}
+							>
+								<li className="mb-5 flex gap-2 font-semibold  hover:text-[#054279] transition-all">
+									<UserIcon className="h-6 w-6" /> Analytics
+								</li>
+							</NavLink>
+							<NavLink
 								to="/dashboard/registered-camps"
 								className={({ isActive, isPending }) =>
 									isActive ? "text-[#054279]" : isPending ? "pending" : ""

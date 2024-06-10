@@ -111,7 +111,7 @@ console.log(regiData);
             setError("Payment confirmation failed");
         }
     };
-// cheek
+
     return (
         <form onSubmit={handleSubmit}>
             <CardElement

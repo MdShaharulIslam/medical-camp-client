@@ -25,14 +25,15 @@ const CheckOutForm = () => {
         },
     });
 
-    const totalFees = regiData.reduce((total, item) => total + item.camp_fees, 0);
-
+    const totalFees = regiData.reduce((total, item) => total + parseInt(item.camp_fees), 0);
+console.log(totalFees);
+console.log(regiData);
     useEffect(() => {
         if (totalFees > 0) {
             axiosSecure
                 .post('/create-payment-intent', { fees: totalFees })
                 .then((res) => {
-                    console.log("Response from /create-payment-intent:", res);
+                    console.log("Response from /create-payment-intent", res);
                     setClientSecret(res.data.clientSecret);
                 })
                 .catch((error) => {
@@ -110,7 +111,7 @@ const CheckOutForm = () => {
             setError("Payment confirmation failed");
         }
     };
-
+// cheek
     return (
         <form onSubmit={handleSubmit}>
             <CardElement

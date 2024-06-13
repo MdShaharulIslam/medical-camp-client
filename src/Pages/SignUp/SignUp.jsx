@@ -24,57 +24,51 @@ const SignUp = () => {
 	const navigate = useNavigate();
 
 	const onSubmit = async (data) => {
-		const imageFile = { image: data.image[0] };
-		const res = await axiosPublic.post(image_api, imageFile, {
-			headers: {
-				"content-type": "multipart/form-data",
-			},
-		});
-		if (res.data) {
-			createUser(data.email, data.password)
-				.then((result) => {
-					if (result) {
-						userUpdate(data.name, res.data.data.display_url)
-							.then(() => {
-								const userData = {
-									name: data.name,
-									email: data.email,
-									image: res.data.data.display_url,
-									role: data.role.value,
-								};
-								axiosPublic.post("/users", userData).then((res) => {
-									if (res.data.insertedId) {
-										Swal.fire({
-											title: "Successfully",
-											text: "Your Account has been created Successfully!",
-											icon: "success",
-											showConfirmButton: false,
-											timer: 1000,
-										});
-										navigate("/");
-									}
-								});
-							})
-							.catch((error) => {
-								Swal.fire({
-									icon: "error",
-									title: "Oops...",
-									text: error.message,
-									showConfirmButton: false,
-									timer: 1000,
-								});
-							});
+		try {
+			const imageFile = new FormData();
+			imageFile.append('image', data.image[0]);
+
+			const res = await axiosPublic.post(image_api, imageFile, {
+				headers: {
+					"content-type": "multipart/form-data",
+				},
+			});
+
+			if (res.data) {
+				const imageUrl = res.data.data.display_url;
+
+				const result = await createUser(data.email, data.password);
+				if (result) {
+					await userUpdate(data.name, imageUrl);
+					const userData = {
+						name: data.name,
+						email: data.email,
+						image: imageUrl,
+						role: data.role.value,
+					};
+
+					const response = await axiosPublic.post("/users", userData);
+					if (response.data.insertedId) {
+						Swal.fire({
+							title: "Successfully",
+							text: "Your Account has been created Successfully!",
+							icon: "success",
+							showConfirmButton: false,
+							timer: 1000,
+						});
+						navigate("/");
 					}
-				})
-				.catch((error) => {
-					Swal.fire({
-						icon: "error",
-						title: "Oops...",
-						text: error.message,
-						showConfirmButton: false,
-						timer: 1000,
-					});
-				});
+				}
+			}
+		} catch (error) {
+			console.error("Error during sign up:", error);
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: error.message,
+				showConfirmButton: false,
+				timer: 1000,
+			});
 		}
 	};
 

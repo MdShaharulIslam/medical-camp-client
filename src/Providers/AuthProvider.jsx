@@ -20,29 +20,61 @@ const AuthProvider = ({ children }) => {
 
 	const createUser = (email, password) => {
 		setLoading(true);
-		return createUserWithEmailAndPassword(auth, email, password);
+		return createUserWithEmailAndPassword(auth, email, password)
+			.catch((error) => {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.error("Error creating user:", errorCode, errorMessage);
+			})
+			.finally(() => setLoading(false));
 	};
 
 	const userLogin = (email, password) => {
 		setLoading(true);
-		return signInWithEmailAndPassword(auth, email, password);
+		return signInWithEmailAndPassword(auth, email, password)
+			.catch((error) => {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.error("Error logging in user:", errorCode, errorMessage);
+			})
+			.finally(() => setLoading(false));
 	};
 
 	const provider = new GoogleAuthProvider();
 
 	const loginWithGoogle = () => {
 		setLoading(true);
-		return signInWithPopup(auth, provider);
+		return signInWithPopup(auth, provider)
+			.catch((error) => {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.error("Error logging in with Google:", errorCode, errorMessage);
+			})
+			.finally(() => setLoading(false));
 	};
 
 	const logOut = () => {
-		return signOut(auth);
+		return signOut(auth)
+			.catch((error) => {
+				// Handle Errors here.
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.error("Error logging out:", errorCode, errorMessage);
+			});
 	};
 
 	const userUpdate = (name, photo) => {
 		return updateProfile(auth.currentUser, {
 			displayName: name,
 			photoURL: photo,
+		}).catch((error) => {
+			// Handle Errors here.
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.error("Error updating user profile:", errorCode, errorMessage);
 		});
 	};
 
@@ -75,6 +107,7 @@ const AuthProvider = ({ children }) => {
 		logOut,
 		userUpdate,
 	};
+
 	return (
 		<AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
 	);

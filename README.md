@@ -1,7 +1,8 @@
 # MedicalCamp
-### Live Link: https://medicampclient.web.app
-### server side Link: https://github.com/MdShaharulIslam/medical-camp-server
-
+## Live Link: https://medicampclient.web.app
+## server side Link: https://github.com/MdShaharulIslam/medical-camp-server
+# Organizer Email: shaharulislam025@gmail.com
+# password : 123456Aa
 #### My Project Features
 - Unique Design and Clean Code
 - Authentication System
